@@ -1,0 +1,17 @@
+[Unit]
+Description=Automounter for rclone google drive
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone mount "Google Drive - beuh780":/ /mnt/gdrive-beuh780 --vfs-cache-mode writes
+
+ExecStop=/usr/bin/fusermount -uz /mnt/gdrive-beuh780
+Restart=on-failure
+
+User=benedikt
+Group=benedikt
+
+[Install]
+WantedBy=multi-user.target
